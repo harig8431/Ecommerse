@@ -1,0 +1,5 @@
+{
+    "ConnectionString": "host=localhost port=5432 dbname=ecommerce user=postgres password=123 sslmode=disable",
+    "ServerIp": "localhost",
+    "ServerPort": "8020"
+}
