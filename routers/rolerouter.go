@@ -15,4 +15,5 @@ func RoleRoutes(router *mux.Router) *mux.Router {
 	router.Handle("/Role/getall", http.HandlerFunc(Rolecontroller.GetAllRoles)).Methods(http.MethodGet)
 
 	return router
+
 }
