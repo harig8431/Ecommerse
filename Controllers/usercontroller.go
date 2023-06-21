@@ -34,6 +34,7 @@ func (u *Usercontroller) Createuser(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(resp)
 }
+
 func (u *Usercontroller) Updateuser(w http.ResponseWriter, r *http.Request) {
 	req := models.User{}
 	err := json.NewDecoder(r.Body).Decode(&req)
