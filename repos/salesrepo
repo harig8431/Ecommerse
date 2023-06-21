@@ -1,0 +1,25 @@
+package repos
+
+import (
+	"project/models"
+	"project/utls"
+	"unicode/utf16"
+)
+
+type SalesInterface interface {
+	CreateSalesentry(obj *models.Invoice) (string, bool,models.Invoice)
+}
+type SalesStruct struct {
+}
+
+func (s *SalesStruct) CreateSalesentry(obj *models.Invoice) (bool, string,models.Invoice) {
+Db,isconnected:=utls.OpenDbConnection()
+if !isconnected{
+	fmt.Println("DB Error",err)
+	return false,"CREATE SALE Failed",*obj
+}
+
+
+}
+
+}

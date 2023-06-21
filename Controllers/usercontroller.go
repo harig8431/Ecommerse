@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
-	"project/repos"
+	"project1/models"
+	"project1/repos"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -26,6 +26,27 @@ func (u *Usercontroller) Createuser(w http.ResponseWriter, r *http.Request) {
 		Statuscode:  200,
 		Result:      status,
 		Description: "User Created Successfully",
+	}
+	resp, err := json.Marshal(response)
+
+	if err != nil {
+		log.Println("Error in Marshaling ", err)
+	}
+	w.Write(resp)
+}
+func (u *Usercontroller) LoginUser(w http.ResponseWriter, r *http.Request) {
+	req := models.User{}
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		log.Println("Error decoding ", err)
+	}
+	myRepo := repos.UserInterface(&repos.UserStruct{})
+	vl, status := myRepo.LoginUser(&req)
+	response := models.ResponseModel{
+		Statuscode:  200,
+		Result:      status,
+		Values:      vl,
+		Description: "Logged in Successfully",
 	}
 	resp, err := json.Marshal(response)
 

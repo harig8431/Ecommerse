@@ -1,10 +1,14 @@
-module project
+module project1
 
 go 1.19
 
 require (
 	github.com/gorilla/mux v1.8.0
+	github.com/lib/pq v1.10.9
 	github.com/urfave/negroni v1.0.0
 )
 
-require github.com/lib/pq v1.10.7 // direct
+require (
+	github.com/felixge/httpsnoop v1.0.1 // indirect
+	github.com/gorilla/handlers v1.5.1 // indirect
+)

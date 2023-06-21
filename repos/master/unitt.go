@@ -3,20 +3,20 @@ package master
 import (
 	"fmt"
 	"log"
-	"project/models"
-	"project/utls"
+	"project1/models"
+	"project1/utls"
 )
 
 type UnitInterface interface {
-	CreateUnit(pdtobj *models.Unitss) bool
-	UpdateUnit(updobj *models.Unitss) (models.Unitss, bool)
-	GetUnitbyid(getobj *models.Unitss) (models.Unitss, bool)
-	GetAllUnitss() ([]models.Unitss, bool)
+	CreateUnit(pdtobj *models.Units) bool
+	UpdateUnit(updobj *models.Units) (models.Units, bool)
+	GetUnitbyid(getobj *models.Units) (models.Units, bool)
+	GetAllUnitss() ([]models.Units, bool)
 }
 type Unitsstruct struct {
 }
 
-func (u *Unitsstruct) CreateUnit(prodobj *models.Unitss) bool {
+func (u *Unitsstruct) CreateUnit(prodobj *models.Units) bool {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
@@ -31,7 +31,7 @@ func (u *Unitsstruct) CreateUnit(prodobj *models.Unitss) bool {
 	return true
 
 }
-func (u *Unitsstruct) UpdateUnit(updobj *models.Unitss) (models.Unitss, bool) {
+func (u *Unitsstruct) UpdateUnit(updobj *models.Units) (models.Units, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
@@ -53,12 +53,12 @@ func (u *Unitsstruct) UpdateUnit(updobj *models.Unitss) (models.Unitss, bool) {
 
 }
 
-func (u *Unitsstruct) GetUnitbyid(getObj *models.Unitss) (models.Unitss, bool) {
+func (u *Unitsstruct) GetUnitbyid(getObj *models.Units) (models.Units, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
 	}
-	result := models.Unitss{}
+	result := models.Units{}
 	query, _ := MyDb.Prepare(`SELECT Id,Unit FROM "units" WHERE id=$1`)
 	er := query.QueryRow(getObj.Id).Scan(&result.Id,
 		&result.Unit,
@@ -72,13 +72,13 @@ func (u *Unitsstruct) GetUnitbyid(getObj *models.Unitss) (models.Unitss, bool) {
 	return result, true
 
 }
-func (u *Unitsstruct) GetAllUnitss() ([]models.Unitss, bool) {
+func (u *Unitsstruct) GetAllUnitss() ([]models.Units, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
 	}
-	result := models.Unitss{}
-	finalstruct := []models.Unitss{}
+	result := models.Units{}
+	finalstruct := []models.Units{}
 
 	query, err := MyDb.Query(`SELECT Id,Unit  FROM "units" `)
 

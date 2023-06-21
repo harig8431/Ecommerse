@@ -2,7 +2,7 @@ package routers
 
 import (
 	"net/http"
-	"project/Controllers/masters"
+	"project1/Controllers/masters"
 
 	"github.com/gorilla/mux"
 )

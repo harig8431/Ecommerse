@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
+	"project1/models"
 
-	"project/repos/master"
+	"project1/repos/master"
 	"strconv"
 
 	"github.com/gorilla/mux"

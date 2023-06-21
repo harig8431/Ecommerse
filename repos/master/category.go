@@ -3,20 +3,20 @@ package master
 import (
 	"fmt"
 	"log"
-	"project/models"
-	"project/utls"
+	"project1/models"
+	"project1/utls"
 )
 
 type CategoryInterface interface {
-	CreateCategory(pdtobj *models.Categories) bool
-	UpdateCategory(updobj *models.Categories) (models.Categories, bool)
-	GetCategorybyid(getobj *models.Categories) (models.Categories, bool)
-	GetAllCategories() ([]models.Categories, bool)
+	CreateCategory(pdtobj *models.Category) bool
+	UpdateCategory(updobj *models.Category) (models.Category, bool)
+	GetCategorybyid(getobj *models.Category) (models.Category, bool)
+	GetAllCategory() ([]models.Category, bool)
 }
 type Categorystruct struct {
 }
 
-func (u *Categorystruct) CreateCategory(prodobj *models.Categories) bool {
+func (u *Categorystruct) CreateCategory(prodobj *models.Category) bool {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
@@ -32,7 +32,7 @@ func (u *Categorystruct) CreateCategory(prodobj *models.Categories) bool {
 	return true
 
 }
-func (u *Categorystruct) UpdateCategory(updobj *models.Categories) (models.Categories, bool) {
+func (u *Categorystruct) UpdateCategory(updobj *models.Category) (models.Category, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
@@ -53,12 +53,12 @@ func (u *Categorystruct) UpdateCategory(updobj *models.Categories) (models.Categ
 
 }
 
-func (u *Categorystruct) GetCategorybyid(getObj *models.Categories) (models.Categories, bool) {
+func (u *Categorystruct) GetCategorybyid(getObj *models.Category) (models.Category, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
 	}
-	result := models.Categories{}
+	result := models.Category{}
 	query, _ := MyDb.Prepare(`SELECT Id,Name FROM "category" WHERE id=$1`)
 	er := query.QueryRow(getObj.Id).Scan(&result.Id,
 		&result.Name,
@@ -74,13 +74,13 @@ func (u *Categorystruct) GetCategorybyid(getObj *models.Categories) (models.Cate
 	return result, true
 
 }
-func (u *Categorystruct) GetAllCategories() ([]models.Categories, bool) {
+func (u *Categorystruct) GetAllCategory() ([]models.Category, bool) {
 	MyDb, isconnected := utls.OpenDbConnection()
 	if !isconnected {
 		fmt.Println("Db connection Failed")
 	}
-	result := models.Categories{}
-	finalstruct := []models.Categories{}
+	result := models.Category{}
+	finalstruct := []models.Category{}
 
 	query, err := MyDb.Query(`SELECT Id,Name FROM "category" `)
 

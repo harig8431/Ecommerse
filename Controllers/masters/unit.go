@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
-	"project/repos/master"
+	"project1/models"
+	"project1/repos/master"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -15,7 +15,7 @@ type Unitcontroller struct {
 }
 
 func (u *Unitcontroller) CreateUnit(w http.ResponseWriter, r *http.Request) {
-	req := models.Unitss{}
+	req := models.Units{}
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		log.Println("Error decoding ", err)
@@ -35,7 +35,7 @@ func (u *Unitcontroller) CreateUnit(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 func (u *Unitcontroller) UpdateUnit(w http.ResponseWriter, r *http.Request) {
-	req := models.Unitss{}
+	req := models.Units{}
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		log.Println("Error decoding ", err)
@@ -60,7 +60,7 @@ func (u *Unitcontroller) GetUnitbyid(w http.ResponseWriter, r *http.Request) {
 	request := mux.Vars(r)
 	id, err := strconv.ParseInt(request["id"], 10, 64)
 	unitid := strconv.FormatInt(id, 10)
-	Unitid := models.Unitss{
+	Unitid := models.Units{
 		Id: unitid,
 	}
 	if err != nil {

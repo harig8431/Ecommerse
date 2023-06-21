@@ -1,0 +1,26 @@
+package Controllers
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"project/models"
+	"project/repos"
+	//"syscall/js"
+)
+
+type SalesController struct {
+}
+
+func (s *SalesController) Salesentry(w http.ResponseWriter, r *http.Request) {
+	req:=models.Invoice{}
+	err:=json.NewDecoder(r.Body).Decode(&req)
+	if err!=nil{
+		fmt.Println("Error Decoding ",err)
+
+	}
+	repo:=repos.SalesInterface(&repos.Salesstruct{})
+
+	
+
+}

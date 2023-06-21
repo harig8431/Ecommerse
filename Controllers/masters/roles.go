@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
-	"project/repos/master"
+	"project1/models"
+	"project1/repos/master"
 
 	"strconv"
 

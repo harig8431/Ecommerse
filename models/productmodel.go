@@ -14,8 +14,8 @@ type ProductsAll struct {
 	Id        int64      `json:"id"`
 	Name      string     `json:"name"`
 	Quantity  string     `json:"quantity"`
-	Category  Categories `json:"category"`
-	Unit      Unitss     `json:"unit"`
+	Category  Category `json:"category"`
+	Unit      Units     `json:"unit"`
 	Price     Prices     `json:"price"`
 	CreatedOn string     `json:"createdon"`
 	Token     string     `json:"token"`
@@ -37,5 +37,12 @@ type GetAllProductResponseModel struct {
 	Statuscode  int64      `json:"statuscode"`
 	Status      bool       `json:"status"`
 	Value       []Products `json:"value"`
+	Description string     `json:"desc"`
+}
+
+type ProductSearchResponseModel struct {
+	Statuscode  int64      `json:"statuscode"`
+	Status      bool       `json:"status"`
+	Value       []ProductsAll `json:"value"`
 	Description string     `json:"desc"`
 }

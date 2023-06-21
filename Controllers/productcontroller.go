@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
-	"project/repos"
-	"project/repos/master"
+	"net/url"
+	"project1/models"
+	"project1/repos"
+	"project1/repos/master"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -73,10 +74,10 @@ func (u *Productcontroller) GetProductbyid(w http.ResponseWriter, r *http.Reques
 	repo := repos.ProductInterface(&repos.ProductStruct{})
 
 	Value, status := repo.GetProductbyid(&id)
-	categoryStruct := models.Categories{
+	categoryStruct := models.Category{
 		Id: Value.Category,
 	}
-	UnitStruct := models.Unitss{
+	UnitStruct := models.Units{
 		Id: Value.Unit,
 	}
 	PriceStruct := models.Prices{
@@ -141,5 +142,34 @@ func (u *Productcontroller) GetAllProducts(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		log.Println("Error in Marshaling ", err)
 	}
+	w.Write(resp)
+}
+
+func (u *Productcontroller) ProductSearch(w http.ResponseWriter, r *http.Request) {
+	request := mux.Vars(r)
+
+	values := url.Values{}
+	for k, v := range request {
+		values.Set(k, v)
+	}
+	searchbar := values.Encode()
+	searchbar = searchbar[4:]
+	repo := repos.ProductInterface(&repos.ProductStruct{})
+
+	value, status := repo.ProductSearch(searchbar)
+
+	response := models.ProductSearchResponseModel{
+		Statuscode:  200,
+		Status:      status,
+		Value:       value,
+		Description: "Product Found",
+	}
+
+	resp, err := json.Marshal(response)
+
+	if err != nil {
+		log.Println("Error in Marshaling ", err)
+	}
+	w.Header().Set("Content-Type", "Application/json")
 	w.Write(resp)
 }

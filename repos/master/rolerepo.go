@@ -3,8 +3,8 @@ package master
 import (
 	"fmt"
 	"log"
-	"project/models"
-	"project/utls"
+	"project1/models"
+	"project1/utls"
 )
 
 type RoleInterface interface {

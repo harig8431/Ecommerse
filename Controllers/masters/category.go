@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"project/models"
-	"project/repos/master"
+	"project1/models"
+	"project1/repos/master"
 
 	"strconv"
 
@@ -16,7 +16,7 @@ type Categorycontroller struct {
 }
 
 func (u *Categorycontroller) CreateCategory(w http.ResponseWriter, r *http.Request) {
-	req := models.Categories{}
+	req := models.Category{}
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		log.Println("Error decoding ", err)
@@ -36,7 +36,7 @@ func (u *Categorycontroller) CreateCategory(w http.ResponseWriter, r *http.Reque
 	w.Write(resp)
 }
 func (u *Categorycontroller) UpdateCategory(w http.ResponseWriter, r *http.Request) {
-	req := models.Categories{}
+	req := models.Category{}
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		log.Println("Error decoding ", err)
@@ -61,7 +61,7 @@ func (u *Categorycontroller) GetCategorybyid(w http.ResponseWriter, r *http.Requ
 	request := mux.Vars(r)
 	id, err := strconv.ParseInt(request["id"], 10, 64)
 	categoryid := strconv.FormatInt(id, 10)
-	Categorystruct := models.Categories{
+	Categorystruct := models.Category{
 		Id: categoryid,
 	}
 	if err != nil {
@@ -102,7 +102,7 @@ func (u *Categorycontroller) GetAllCategorys(w http.ResponseWriter, r *http.Requ
 	// 	log.Println("Error decoding ",err)
 	// }
 	myRepo := master.CategoryInterface(&master.Categorystruct{})
-	value, status := myRepo.GetAllCategories()
+	value, status := myRepo.GetAllCategory()
 	response := models.GetAllCategoriesResponseModel{
 		Statuscode:  200,
 		Status:      status,
